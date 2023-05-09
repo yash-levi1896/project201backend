@@ -2,7 +2,7 @@ const express=require("express")
 
 const adminrouter=express.Router()
 
-const {adminmodel}=require("../models/admin.model")
+const {adminmodel}=require("../Models/admin.model")
 
 adminrouter.post("/adminpost",async(req,res)=>{
 try {
