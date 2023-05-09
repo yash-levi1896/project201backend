@@ -8,12 +8,12 @@ app.use(cors())
 const http=require('http');
 const  connection  = require('./db');
 
-const {productRoute}=require('./Routes/product.routes')
-const {cartRoutes}=require("./Routes/cart.routes")
+const {productRoute}=require('./routes/product.routes')
+const {cartRoutes}=require("./routes/cart.routes")
 const {userRouter}=require("./routes/User.routes")
 const {authenticate}=require("./middlewares/authenticate.middleware")
 
-const {adminrouter}=require("./Routes/admin.route")
+const {adminrouter}=require("./routes/admin.route")
 
 
 require("dotenv").config();
