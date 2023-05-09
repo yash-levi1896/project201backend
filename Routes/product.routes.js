@@ -1,6 +1,6 @@
 const express=require('express');
 const productRoute=express.Router()
-const ProductModel=require("../Models/product.model")
+const ProductModel=require("../models/product.model")
 
 productRoute.get("/",async(req,res)=>{
     let {page,q,category}=req.query;

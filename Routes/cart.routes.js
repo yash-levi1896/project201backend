@@ -1,6 +1,6 @@
 const express=require('express');
 const cartRoutes=express.Router()
-const CartProductModel=require("../Models/cart.model")
+const CartProductModel=require("../models/cart.model")
 const jwt = require("jsonwebtoken")
 
 

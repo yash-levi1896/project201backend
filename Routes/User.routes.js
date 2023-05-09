@@ -1,12 +1,12 @@
 const express=require("express")
 
-const {UserModel}=require("../Models/User.model")
+const {UserModel}=require("../models/User.model")
 const userRouter=express.Router()
 const jwt=require("jsonwebtoken")
 const bcrypt=require("bcrypt")
-const {blacklist}=require("../Models/blacklist")
+const {blacklist}=require("../models/blacklist")
 const {authenticate}=require("../middlewares/authenticate.middleware")
-const { adminmodel } = require("../Models/admin.model")
+const { adminmodel } = require("../models/admin.model")
 
 const {passport} = require("../google_auth")
 // const {client} = require("../middlewares/redis")
