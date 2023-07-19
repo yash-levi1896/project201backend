@@ -42,7 +42,7 @@ const razorpayInstance = new Razorpay({
 //app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/success.html'))
+    res.sendFile(path.join(__dirname, './frontend/success.html'))
 })
 
 app.post('/createOrder', (req, res)=>{
