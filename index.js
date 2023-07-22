@@ -13,7 +13,6 @@ const {cartRoutes}=require("./routes/cart.routes")
 const {userRouter}=require("./Routes/User.routes")
 const swaggerJSdoc=require("swagger-jsdoc")
 const swaggerUI=require("swagger-ui-express")
-const {authenticate}=require("./middlewares/authenticate.middleware")
 
 const {adminrouter}=require("./routes/admin.route")
 
