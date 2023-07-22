@@ -10,7 +10,9 @@ const  connection  = require('./db');
 
 const {productRoute}=require('./routes/product.routes')
 const {cartRoutes}=require("./routes/cart.routes")
-const {userRouter}=require("./routes/User.routes")
+const {userRouter}=require("./Routes/User.routes")
+const swaggerJSdoc=require("swagger-jsdoc")
+const swaggerUI=require("swagger-ui-express")
 const {authenticate}=require("./middlewares/authenticate.middleware")
 
 const {adminrouter}=require("./routes/admin.route")
@@ -72,6 +74,27 @@ app.post('/verifyOrder', (req, res)=>{
         res.json({success:false, message:"Payment verification failed"})
     }
 });
+
+const options={
+    definition:{
+        openapi:"3.0.0",
+        info:{
+            title:"Learning Swagger",
+            version:"1.0.0"
+        },
+        servers:[
+            {
+                url:"https://handsome-nightshirt-cow.cyclic.app"
+            }
+        ]
+    },
+    apis:["./Routes/*.js"]
+}
+
+//specification
+const swaggerSpec= swaggerJSdoc(options)
+//building UI
+app.use("/documentation",swaggerUI.serve,swaggerUI.setup(swaggerSpec))
 
 // ************************************************************************************************//
 app.use("/product",productRoute)

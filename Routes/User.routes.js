@@ -14,6 +14,56 @@ const {passport} = require("../google_auth")
 //const {client} = require("../middlewares/redis")
 require("dotenv").config()
 
+// swagger
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     userSchema:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *         name:
+ *           type: string
+ *         email:
+ *           type: string
+ *         pass:
+ *           type: string
+ *         role:
+ *           type: string
+ *           enum:
+ *             - User
+ *             - Admin
+ */
+
+
+/**
+ * @swagger
+ * /users/register:
+ *  post:
+ *      summary: To add a new user to the database
+ *      tags: [posts]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/userSchema'
+ *      responses:
+ *          200:
+ *              description: The user was successfully added.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/userSchema'
+ *          500:
+ *              description: Some server error
+ */
+
+
+
 
 userRouter.post("/register",async(req,res)=>{
     const {name,email,pass}=req.body
@@ -39,6 +89,31 @@ userRouter.post("/register",async(req,res)=>{
     }
     
 })
+
+/**
+ * @swagger
+ * /users/login:
+ *  post:
+ *      summary: To add a new user to the database
+ *      tags: [posts]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/userSchema'
+ *      responses:
+ *          200:
+ *              description: The user was successfully added.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/userSchema'
+ *          500:
+ *              description: Some server error
+ */
+
+
 
 userRouter.post("/login", async(req,res)=>{
     const {email,pass}=(req.body)
@@ -105,8 +180,8 @@ userRouter.get("/logout",(req,res)=>{
       const user=req.user
       let name=user.name
       let id=user._id
-    
-      res.send(`<a href="http://127.0.0.1:5501/frontend/html/index.html?userid=${id}&name=${name}">Click here to continue</a>`)
+      let token=jwt.sign({userID:user._id},"masai")
+      res.send(`<a href="http://127.0.0.1:5501/frontend/html/index.html?userid=${id}&&name=${name}&&token=${token}">Click here to continue</a>`)
  
   })
 
