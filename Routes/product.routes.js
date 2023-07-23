@@ -48,7 +48,14 @@ const ProductModel=require("../models/product.model")
 
 
 productRoute.get("/",async(req,res)=>{
-    let {page,q,category}=req.query;
+    let {page,q,category,sortby,value}=req.query;
+    if(sortby){
+        if(value=='asc'){
+            var svalue={[sortby]:1}
+        }else{
+            var svalue={[sortby]:-1}
+        }
+    }
     let filter={};
     let pageNumber=page||1;
     let skipitems=(pageNumber-1)*12;
@@ -59,7 +66,7 @@ productRoute.get("/",async(req,res)=>{
         filter.$or = 
         [ { name: { $regex: q, $options: 'i' } }]
     }
-    let product=await ProductModel.find(filter).skip(skipitems).limit(12);
+    let product=await ProductModel.find(filter).sort(svalue).skip(skipitems).limit(12);
     let productTotal=await ProductModel.find(filter)
     //res.header({"X-Total-Count":productTotal.length});
     res.send({"Total":productTotal.length,"products":product})
